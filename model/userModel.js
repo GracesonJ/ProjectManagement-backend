@@ -4,7 +4,7 @@ const mongoose = require('mongoose')
 
 const userSchema = new mongoose.Schema({
     name: {
-        required : true,
+        required: true,
         type: String
     },
     email: {
@@ -13,31 +13,32 @@ const userSchema = new mongoose.Schema({
         unique: true
     },
     password: {
-        required : true,
+        required: true,
         type: String
     },
-    phone:{
+    phone: {
         type: Number,
     },
-    department:{
+    department: {
         type: String,
         required: true,
     },
-    designation:{
+    designation: {
         type: String,
         required: true
     },
-    role : {
-        type : String,
-        required: true,
-        default : "Employee"
+    profileImage: {
+        type: String
     },
-    profileImage:{
-        type:String
+    dateOfBirth: {
+        type: Date
     },
-    dateOfBirth:{
-        type : Date
+    companyId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'companies',
+        required: true
     }
+
 })
 
 // create model

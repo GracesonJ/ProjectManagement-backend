@@ -2,7 +2,7 @@
 
 const mongoose = require('mongoose')
 
-const ownerSchema = new mongoose.Schema({
+const companySchema = new mongoose.Schema({
     companyName: {
         required : true,
         type: String
@@ -20,10 +20,6 @@ const ownerSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    ownerName:{
-        type: String,
-        required: true
-    },
     email:{
         type: String,
         unique: true,
@@ -33,25 +29,18 @@ const ownerSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    role : {
-        type : String,
-        required: true,
-        default : "owner"
-    },
     profileImage:{
         type:String
     },
-    dateOfBirth:{
-        type : Date
-    },
-    phone:{
-        type : Number,
-        required : true
+    designation : {
+        type : String,
+        required: true,
+        default : "Company"
     }
 })
 
 // create model
-const owners = mongoose.model("owners", ownerSchema)
+const companies = mongoose.model("companies", companySchema)
 
 // export model
-module.exports = owners
+module.exports = companies

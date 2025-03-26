@@ -1,16 +1,32 @@
-// import express
-const express = require('express')
-const ownerRegController = require('./controller/ownerRegController')
-const userController = require('./controller/userController')
+const express = require('express');
+const router = express.Router();
+const jwtMiddleware = require('./middleware/jwtMiddleware')
 
-// instance router
-const router = new express.Router()
+// Import Controllers
+const companyRegController = require('./controller/CompanyRegController');
+const userController = require('./controller/userController');
+const projectController = require('./controller/projectController')
 
-// reg owner
-router.post('/register-owner', ownerRegController.ownerRegister )
+// Import Middlewares
+const { authenticate } = require('./middleware/authMiddleware');
+// const { validateObjectId } = require('./middleware/validationMiddleware');
 
-// reg user
-router.post('/user-register', userController.userRegister)
+// Company Routes
+router.post('/register-company', companyRegController.companyRegister);
+
+// Authentication Routes
+router.post('/register-user', userController.userRegisterController);
+router.post('/user-login', userController.userLoginController);
+
+// User Management Routes
+router.get('/all-users', jwtMiddleware, userController.getAllUsersController);
+router.get('/companies/:companyId/users', jwtMiddleware, userController.getCompanyUsersController);
+router.get('/users/:id', jwtMiddleware, userController.getUserById);
+
+router.post('/add-project', jwtMiddleware,  projectController.addProjectController )
+
+// get manager List
+router.get('/get-managerlist', jwtMiddleware, userController.getManagerListController)
 
 
-module.exports = router
+module.exports = router;

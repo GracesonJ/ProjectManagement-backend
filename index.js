@@ -35,8 +35,6 @@ pmServer.listen(PORT,()=>{
 })
 
 
-
-
 // // get
 pmServer.get('/',(req, res)=>{
     res.send(`get request received`)
